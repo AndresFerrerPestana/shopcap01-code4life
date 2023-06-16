@@ -5,20 +5,28 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.andrescatalogue.shopcap01code4life.entities.Client;
+import com.andrescatalogue.shopcap01code4life.services.ClientService;
 
 @RestController
 @RequestMapping(value = "/clients")
 public class ClientResource implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Autowired
+	private ClientService service;
 
 	@GetMapping
 	public ResponseEntity<List<Client>> findAll() {
+		
+		/*
+		 ******** LOCAL LIST OF CLIENTS ********
 		List<Client> list = new ArrayList<>();
 		
 		Instant instantOne = Instant.parse("1995-01-19T17:35:30.01Z");
@@ -32,7 +40,7 @@ public class ClientResource implements Serializable {
 		Instant instantNine = Instant.parse("1974-12-19T17:35:30.01Z");
 		Instant instantTen = Instant.parse("1973-12-19T17:35:30.01Z");
 		
-		list.add(new Client(1L, "Catarina Isabel Marques Jesus", "7513489240", 6.000, instantOne, 0));
+		list.add(new Client(1L, "Joaquim Marquês Trabuco Trincheirinha", "7087397353", 9.000, instantOne, 3));
 		list.add(new Client(2L, "Martim Ferrer da Silva Pestana", "7513698418", 6.500, instantTwo, 0));
 		list.add(new Client(3L, "Andrés Ferrer de Pestana", "7513397614", 12.500, instantThree, 2));
 		list.add(new Client(4L, "Daniel Alexandre Silva Antunes", "751337890", 4.500, instantFour, 0));
@@ -41,8 +49,12 @@ public class ClientResource implements Serializable {
 		list.add(new Client(7L, "Manuel António Rodrigues dos Santos", "7511390683", 9.500, instantSeven, 4));
 		list.add(new Client(8L, "Rodrigo Alexandre Lameiras", "7511397353", 10.500, instantEight, 4));
 		list.add(new Client(9L, "Sandra Marques dos Santos Lameiras", "7511387353", 8.000, instantNine, 3));
-		list.add(new Client(10L, "Joaquim Baluarte Traquinas", "7087397353", 9.000, instantTen, 3));
+		list.add(new Client(10L, "Catarina Isabel Marques Jesus", "7513489240", 6.000, instantTen, 0));
+		*/
 		
+		List<Client> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
+	
+	
 }
